@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Bella Vita | Fine Dining</title>
+
+  <!-- Bootstrap, Icons & Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #c5a047;
+      --dark: #111;
+      --light: #f5f5f5;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(5px);
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+    }
+    .nav-link {
+      color: var(--light) !important;
+      font-weight: 500;
+    }
+    .nav-link:hover { color: var(--gold) !important; }
+
+    /* Hero */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      animation: fadeInUp 2s ease-out;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem; color: var(--gold);
+    }
+    .btn-gold {
+      background-color: var(--gold);
+      color: var(--dark);
+      border: none;
+      padding: 12px 35px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border-radius: 50px;
+    }
+    .btn-gold:hover {
+      background-color: #b8933b;
+      transform: scale(1.08);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Sections */
+    section { padding: 80px 0; }
+    .section-title {
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+
+    /* About */
+    .about img {
+      border-radius: 10px;
+      transition: transform 0.6s ease, box-shadow 0.6s ease;
+    }
+    .about img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(197, 160, 71, 0.3);
+    }
+
+    /* Menu */
+    .menu-item {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .menu-item img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: transform 0.4s ease;
+    }
+    .menu-item:hover img { transform: scale(1.1); }
+    .menu-item:hover {
+      border: 1px solid var(--gold);
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(197, 160, 71, 0.2);
+    }
+    .menu-item h5 { color: var(--gold); }
+
+    /* Chef Section */
+    .chef-card {
+      background-color: #1a1a1a;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+    .chef-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(197, 160, 71, 0.3);
+    }
+    .chef-card img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+    .chef-card h5 { color: var(--gold); }
+
+    /* Reservation Form */
+    .reservation-form input,
+    .reservation-form textarea,
+    .reservation-form select {
+      background-color: transparent;
+      border: 2px solid var(--gold);
+      color: var(--light);
+      border-radius: 10px;
+      padding: 10px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+    .reservation-form input:focus,
+    .reservation-form textarea:focus,
+    .reservation-form select:focus {
+      outline: none;
+      box-shadow: 0 0 15px var(--gold);
+      transform: scale(1.02);
+    }
+
+    /* Contact */
+    .contact-info i {
+      color: var(--gold);
+      font-size: 1.5rem;
+      margin-right: 10px;
+    }
+
+    /* Map */
+    .map-container {
+      border: 3px solid var(--gold);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(197, 160, 71, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      color: var(--light);
+      text-align: center;
+      padding: 30px 0;
+    }
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">La Bella Vita</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon text-light"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#chefs">Our Chefs</a></li>
+          <li class="nav-item"><a class="nav-link" href="#reservation">Reservation</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 data-aos="zoom-in">Welcome to La Bella Vita</h1>
+      <p data-aos="fade-up">Experience the Art of Fine Dining</p>
+      <a href="#reservation" class="btn btn-gold mt-3" data-aos="fade-up" data-aos-delay="300">Book a Table</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about container text-center">
+    <h2 class="section-title" data-aos="fade-down">About Us</h2>
+    <div class="row align-items-center">
+      <div class="col-md-6" data-aos="fade-right">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" class="img-fluid" alt="Restaurant Interior">
+      </div>
+      <div class="col-md-6" data-aos="fade-left">
+        <p>
+          La Bella Vita offers a world-class fine dining experience blending authentic Italian flavors with modern artistry. Every dish is a masterpiece crafted by our award-winning chefs to create moments of pure delight.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu" class="bg-dark text-center">
+    <div class="container">
+      <h2 class="section-title" data-aos="zoom-in">Our Signature Dishes</h2>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="flip-left">
+          <div class="menu-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh4a17feQMjdvfKXqS-WJBSh-bhH8DYqDzaQ&s" alt="Truffle Risotto">
+            <h5>Indian Dishes</h5>
+            <p>From the streets of Delhi to the kitchens of Lucknow — an authentic taste of India.”</p>
+            <strong>$25</strong>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="flip-up">
+          <div class="menu-item">
+            <img src="https://static.wixstatic.com/media/2cbff6_ac782b0eaff94ec0881f0299fdb76ab6~mv2.jpg/v1/fill/w_900,h_700,al_c,q_85/2cbff6_ac782b0eaff94ec0881f0299fdb76ab6~mv2.jpg" alt="Seafood Pasta">
+            <h5>Italian Dishes</h5>
+            <p>“Savor the art of Italian perfection — simple, soulful, sublime.”</p>
+            <strong>$28</strong>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="flip-right">
+          <div class="menu-item">
+            <img src="https://blog.eatfit.in/wp-content/uploads/2023/03/image-30.png" alt="Tiramisu">
+            <h5>Chines Dishes</h5>
+            <p>“Authentic Chinese cuisine, where tradition meets modern elegance.”.</p>
+            <strong>$12</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chef Section -->
+  <section id="chefs" class="text-center">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Meet Our Chefs</h2>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="zoom-in">
+          <div class="chef-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqKQJ5bvHR-WbLA_3On6pNLFM0TtDbtrPPA&s" alt="Chef Marco">
+            <h5>Chef Marco Rossi</h5>
+            <p>Head Chef • Indian Classics Expert</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="chef-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4cdz1xREnotvKVsC0K66pS8IgpVZyl1of-w&s" alt="Chef Elena">
+            <h5>Chef Elena Ricci</h5>
+            <p> Chef • chanies Specialist </p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
+          <div class="chef-card">
+            <img src="https://images.unsplash.com/photo-1556911073-52527ac43754?auto=format&fit=crop&w=800&q=80" alt="Chef Antonio">
+            <h5>Chef Antonio De Luca</h5>
+            <p>Sous Chef • Fusion Cuisine Master</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reservation -->
+  <section id="reservation" class="bg-dark text-center">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Reserve Your Table</h2>
+      <form id="reservation-form" class="reservation-form mx-auto" style="max-width: 600px;" data-aos="fade-up" data-aos-delay="200">
+        <div class="mb-3">
+          <input type="text" id="reservation-name" name="reservation_name" placeholder="Full Name" required>
+        </div>
+        <div class="mb-3">
+          <input type="email" id="reservation-email" name="reservation_email" placeholder="Email Address" required>
+        </div>
+        <div class="mb-3">
+          <input type="tel" id="reservation-phone" name="reservation_phone" placeholder="Phone Number" required>
+        </div>
+        <div class="mb-3">
+          <input type="text" id="reservation-date" placeholder="dd-mm-yyyy" required>
+          <input type="hidden" id="reservation-date-iso" name="reservation_date_iso">
+        </div>
+        <!-- Menu pre-booking: choose dishes and quantity -->
+        <div class="mb-3">
+          <label style="display:block;margin-bottom:8px;color:#ddd">Pre-book Menu (optional)</label>
+          <div style="display:flex;gap:10px;flex-direction:column;">
+            <label style="display:flex;align-items:center;gap:10px;">
+              <input type="checkbox" class="menu-item-checkbox" data-name="Indian Special" data-price="25" />
+              <span style="flex:1;color:#fff">Indian Special — $25</span>
+              <input type="number" class="menu-item-qty" value="1" min="1" style="width:70px;" disabled />
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;">
+              <input type="checkbox" class="menu-item-checkbox" data-name="Seafood Pasta" data-price="28" />
+              <span style="flex:1;color:#fff">Seafood Pasta — $28</span>
+              <input type="number" class="menu-item-qty" value="1" min="1" style="width:70px;" disabled />
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;">
+              <input type="checkbox" class="menu-item-checkbox" data-name="Tiramisu" data-price="12" />
+              <span style="flex:1;color:#fff">Tiramisu — $12</span>
+              <input type="number" class="menu-item-qty" value="1" min="1" style="width:70px;" disabled />
+            </label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <input type="time" id="reservation-time" name="reservation_time" required>
+        </div>
+        <div class="mb-3">
+          <select id="reservation-guests" name="reservation_guests" required>
+            <option value="">Number of Guests</option>
+            <option>1-2 Guests</option>
+            <option>3-4 Guests</option>
+            <option>5-6 Guests</option>
+            <option>7+ Guests</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <textarea id="reservation-requests" name="reservation_requests" rows="3" placeholder="Special Requests"></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold">Submit Reservation</button>
+      </form>
+
+      <!-- My Reservations (stored locally) -->
+      <div id="my-reservations" class="mt-4" style="max-width:600px;margin:30px auto;">
+        <h4 class="section-title" style="font-size:1.25rem;">My Reservations</h4>
+        <div id="reservations-list"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact & Map -->
+  <section id="contact" class="container text-center">
+    <h2 class="section-title" data-aos="fade-down">Contact Us</h2>
+    <div class="row">
+      <div class="col-md-4 contact-info" data-aos="fade-right">
+        <i class="bi bi-telephone"></i>
+        <p>+39 06 1234 5678</p>
+      </div>
+      <div class="col-md-4 contact-info" data-aos="fade-up">
+        <i class="bi bi-envelope"></i>
+        <p>info@labellavita.com</p>
+      </div>
+      <div class="col-md-4 contact-info" data-aos="fade-left">
+        <i class="bi bi-geo-alt"></i>
+        <p>123 Luxury Ave, Rome, Italy</p>
+      </div>
+    </div>
+  </section>
+  </div>
+      <a href="https://goo.gl/maps/MFJ6rK6dXEP2" target="_blank" class="btn btn-gold mt-4" data-aos="fade-up" data-aos-delay="300">Get Directions</a>
+    </div>
+  </section>
+
+  <!-- Our Location -->
+  <section id="location" class="bg-dark text-center">
+    <div class="container">
+      <h2 class="section-title" data-aos="zoom-in">Our Location</h2>
+      <div class="map-container" data-aos="fade-up">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.164821748527!2d12.496365215674856!3d41.90278397922012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61aa6c1a3a07%3A0xf223c985c9471a4d!2sRome%2C%20Italy!5e0!3m2!1sen!2sit!4v1687429167294!5m2!1sen!2sit"
+          width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 La Bella Vita | Designed with <span style="color: var(--gold);">♥</span> in Rome</p>
+    <p><a href="#top">Back to Top</a></p>
+  </footer>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    // Make the reservation date editable (accept dd-mm-yyyy), validate and store ISO
+    (function() {
+      const dateInput = document.getElementById('reservation-date');
+      const hiddenIso = document.getElementById('reservation-date-iso');
+      const form = dateInput ? dateInput.closest('form') : null;
+      if (!dateInput) return;
+
+      function parseDDMMYYYY(value) {
+        // Accept separators '-', '/', '.' or space
+        const parts = value.trim().split(/[-\/\.\s]+/);
+        if (parts.length !== 3) return null;
+        let [d, m, y] = parts;
+        if (y.length === 2) {
+          // two-digit year -> assume 20xx
+          y = '20' + y;
+        }
+        const day = parseInt(d, 10);
+        const month = parseInt(m, 10);
+        const year = parseInt(y, 10);
+        if (Number.isNaN(day) || Number.isNaN(month) || Number.isNaN(year)) return null;
+        // Basic ranges
+        if (year < 1000 || month < 1 || month > 12 || day < 1 || day > 31) return null;
+        const dt = new Date(year, month - 1, day);
+        // Ensure constructed date matches components (handles invalid days for month)
+        if (dt.getFullYear() !== year || dt.getMonth() !== month - 1 || dt.getDate() !== day) return null;
+        return dt;
+      }
+
+      function toISO(dt) {
+        const yyyy = dt.getFullYear();
+        const mm = String(dt.getMonth() + 1).padStart(2, '0');
+        const dd = String(dt.getDate()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}`;
+      }
+
+      function setHiddenIsoFromInput() {
+        const val = dateInput.value;
+        if (!val) {
+          hiddenIso.value = '';
+          dateInput.setCustomValidity('');
+          return true;
+        }
+        const dt = parseDDMMYYYY(val);
+        if (!dt) {
+          dateInput.setCustomValidity('Please enter a valid date in dd-mm-yyyy format.');
+          return false;
+        }
+        // Optional: prevent past dates
+        const today = new Date();
+        today.setHours(0,0,0,0);
+        if (dt < today) {
+          dateInput.setCustomValidity('Please choose today or a future date.');
+          return false;
+        }
+        dateInput.setCustomValidity('');
+        hiddenIso.value = toISO(dt);
+        return true;
+      }
+
+      // Validate on blur and input
+      dateInput.addEventListener('blur', setHiddenIsoFromInput);
+      dateInput.addEventListener('input', function() {
+        // clear validity while typing
+        dateInput.setCustomValidity('');
+      });
+
+      // On form submit, validate and prevent submission if invalid
+      // Helper storage functions
+      function getReservations() {
+        try {
+          return JSON.parse(localStorage.getItem('reservations') || '[]');
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function saveReservations(list) {
+        localStorage.setItem('reservations', JSON.stringify(list));
+      }
+
+      function renderReservations() {
+        const list = getReservations();
+        const container = document.getElementById('reservations-list');
+        if (!container) return;
+        container.innerHTML = '';
+        if (list.length === 0) {
+          container.innerHTML = '<p style="color:#ccc;">No reservations yet.</p>';
+          return;
+        }
+        list.forEach(r => {
+          const card = document.createElement('div');
+          card.className = 'menu-item mb-3';
+          card.style.padding = '12px';
+          const itemsHtml = (r.items && r.items.length) ? ('<ul style="margin:6px 0 0 16px;color:#ddd">' + r.items.map(it => `<li>${escapeHtml(it.name)} x${it.qty} — $${(it.price*it.qty).toFixed(2)}</li>`).join('') + '</ul>') : '';
+          const total = (r.items && r.items.length) ? r.items.reduce((s,it)=>s + (it.price * (it.qty||1)), 0) : 0;
+          const totalHtml = total ? `<div style="margin-top:8px;color:#fff;font-weight:600">Prebook total: $${total.toFixed(2)}</div>` : '';
+          card.innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <strong style="color:var(--gold);">${escapeHtml(r.name)}</strong><br>
+                <small style="color:#ddd;">${escapeHtml(r.date_display)} ${r.time} • ${escapeHtml(r.guests)}</small>
+              </div>
+              <div>
+                <button data-id="${r.id}" class="btn btn-sm btn-outline-light cancel-reservation">Cancel</button>
+              </div>
+            </div>
+            ${itemsHtml}
+            ${totalHtml}
+            <div style="margin-top:8px;color:#bbb;font-size:0.9rem">${escapeHtml(r.requests || '')}</div>
+          `;
+          container.appendChild(card);
+        });
+        // attach handlers
+        container.querySelectorAll('.cancel-reservation').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            let list = getReservations();
+            list = list.filter(x => String(x.id) !== String(id));
+            saveReservations(list);
+            renderReservations();
+          });
+        });
+      }
+
+      function escapeHtml(s) {
+        if (!s) return '';
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      // On form submit: validate, save to localStorage, render list, prevent real navigation
+      if (form) {
+        // enable/disable qty inputs when checkbox toggled
+        document.querySelectorAll('.menu-item-checkbox').forEach((chk, idx) => {
+          chk.addEventListener('change', function() {
+            const qty = document.querySelectorAll('.menu-item-qty')[idx];
+            if (qty) qty.disabled = !this.checked;
+          });
+        });
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          if (!setHiddenIsoFromInput()) {
+            dateInput.reportValidity();
+            return;
+          }
+          const nameEl = document.getElementById('reservation-name');
+          const emailEl = document.getElementById('reservation-email');
+          const phoneEl = document.getElementById('reservation-phone');
+          const timeEl = document.getElementById('reservation-time');
+          const guestsEl = document.getElementById('reservation-guests');
+          const requestsEl = document.getElementById('reservation-requests');
+
+          // collect selected menu items
+          const items = [];
+          const checkboxes = Array.from(document.querySelectorAll('.menu-item-checkbox'));
+          const qtys = Array.from(document.querySelectorAll('.menu-item-qty'));
+          checkboxes.forEach((cb, i) => {
+            if (cb.checked) {
+              const name = cb.getAttribute('data-name');
+              const price = parseFloat(cb.getAttribute('data-price')) || 0;
+              const qty = parseInt((qtys[i] && qtys[i].value) || '1', 10) || 1;
+              items.push({ name: name, price: price, qty: qty });
+            }
+          });
+
+          const reservation = {
+            id: Date.now(),
+            name: nameEl ? nameEl.value.trim() : '',
+            email: emailEl ? emailEl.value.trim() : '',
+            phone: phoneEl ? phoneEl.value.trim() : '',
+            date_iso: hiddenIso.value,
+            date_display: dateInput.value.trim(),
+            time: timeEl ? timeEl.value : '',
+            guests: guestsEl ? guestsEl.value : '',
+            requests: requestsEl ? requestsEl.value.trim() : '',
+            items: items
+          };
+          const list = getReservations();
+          list.push(reservation);
+          saveReservations(list);
+          renderReservations();
+          // show small confirmation
+          alert('Reservation saved locally. You can view it under My Reservations.');
+          // clear form fields (except keep date empty)
+          form.reset();
+          hiddenIso.value = '';
+          // ensure qty inputs are disabled again after reset
+          document.querySelectorAll('.menu-item-qty').forEach(q => q.disabled = true);
+        });
+      }
+
+      // Initial render
+      renderReservations();
+    })();
+  </script>
+</body>
+</html>
